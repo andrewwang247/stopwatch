@@ -26,6 +26,7 @@ bool Framework::executed(const string& name) const noexcept {
 
 void Framework::emplace(const string& name, const function<void()>& func) {
   tests.emplace(name, func);
+  results.erase(name);
 }
 
 void Framework::run(const string& name) {
