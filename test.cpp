@@ -95,7 +95,7 @@ int main() {
 
   fr.run_all();
   cout << fr << "Passed " << fr.passed() << " out of " << fr.executed_size()
-       << " tests." << endl;
+       << " tests.\n";
 }
 
 template <typename T, size_t N>
