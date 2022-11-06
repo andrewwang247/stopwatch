@@ -42,7 +42,7 @@ class Stopwatch {
    * to specify the stopwatch mode. Defaults to
    * split mode.
    */
-  explicit Stopwatch(bool = SPLIT_MODE);
+  explicit Stopwatch(bool mode_in = SPLIT_MODE);
 
   /**
    * Reserve the internal buffer to the given
@@ -51,7 +51,7 @@ class Stopwatch {
    * Optional argument to specify the stopwatch
    * mode. Defaults to split mode.
    */
-  explicit Stopwatch(size_t, bool = SPLIT_MODE);
+  explicit Stopwatch(size_t res, bool = SPLIT_MODE);
 
   /**
    * Returns whether or not there are recorded
@@ -75,7 +75,7 @@ class Stopwatch {
   /**
    * Sets the stopwatch mode.
    */
-  void mode(bool) noexcept;
+  void mode(bool mode_in) noexcept;
 
   /**
    * Records the current time measurement.
@@ -97,7 +97,7 @@ class Stopwatch {
    * the indexed split or elapsed time.
    */
   template <typename Integer>
-  typename Duration::rep operator[](Integer) const;
+  typename Duration::rep operator[](Integer index) const;
 
   /**
    * Yields a const reference to the underlying
@@ -111,7 +111,7 @@ class Stopwatch {
    * underlying time_point measurements.
    */
   template <typename Integer>
-  typename Clock::time_point data(Integer) const;
+  typename Clock::time_point data(Integer index) const;
 
   /**
    * Returns the number of underlying data measurements.
@@ -149,7 +149,7 @@ class Stopwatch {
     bool mode() const noexcept;
 
     // Sets the iterator mode.
-    void mode(bool) noexcept;
+    void mode(bool mode_in) noexcept;
 
     // Increment and decrement operators.
 
@@ -160,25 +160,25 @@ class Stopwatch {
 
     // Gives the split pointed to by this iterator.
     typename Duration::rep operator*() const;
-    typename Duration::rep operator[](ptrdiff_t) const;
+    typename Duration::rep operator[](ptrdiff_t dist) const;
     // This iterator has no arrow operator.
 
     // Comparison operators.
 
-    bool operator==(const iterator&) const noexcept;
-    bool operator!=(const iterator&) const noexcept;
-    bool operator<(const iterator&) const noexcept;
-    bool operator<=(const iterator&) const noexcept;
-    bool operator>(const iterator&) const noexcept;
-    bool operator>=(const iterator&) const noexcept;
+    bool operator==(const iterator& other) const noexcept;
+    bool operator!=(const iterator& other) const noexcept;
+    bool operator<(const iterator& other) const noexcept;
+    bool operator<=(const iterator& other) const noexcept;
+    bool operator>(const iterator& other) const noexcept;
+    bool operator>=(const iterator& other) const noexcept;
 
     // Arithmetic operators.
 
-    iterator& operator+=(ptrdiff_t) noexcept;
-    iterator& operator-=(ptrdiff_t) noexcept;
-    iterator operator+(ptrdiff_t) const noexcept;
-    iterator operator-(ptrdiff_t) const noexcept;
-    ptrdiff_t operator-(const iterator&) const;
+    iterator& operator+=(ptrdiff_t dist) noexcept;
+    iterator& operator-=(ptrdiff_t dist) noexcept;
+    iterator operator+(ptrdiff_t dist) const noexcept;
+    iterator operator-(ptrdiff_t dist) const noexcept;
+    ptrdiff_t operator-(const iterator& other) const;
 
     /*
     Note: friend functions are not used because mixing
